@@ -1,2 +1,2 @@
 # CouponIssuer
-Simplest Coupon No Issuing Simulator
+Simplest Coupon Number Issuing Simulator
