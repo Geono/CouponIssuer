@@ -6,8 +6,8 @@
 * Docker, Docker Compose, node, npm, yarn
 # 실행법
 1. `$ sudo docker-compose up` 을 입력하여 POSTGRESQL 데이터베이스를 실행
-2. backend/ 에서 `$ node initdb.js` 를 입력하여 데이터베이스 초기화
-3. backend/ 에서 `$ yarn && yarn serve` 를 입력하여 백엔드 서버 실행
+2. backend/ 에서 `$ yarn && node initdb.js` 를 입력하여 데이터베이스 초기화
+3. backend/ 에서 `$ yarn serve` 를 입력하여 백엔드 서버 실행
 4. frontend/ 에서 `$ yarn && yarn serve` 를 입력하여 프론트엔드 서버 실행
 5. 브라우저로 http://localhost:8080 접속
 # 사용법
