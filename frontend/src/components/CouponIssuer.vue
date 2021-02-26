@@ -37,9 +37,9 @@
         <label :for="'filter-' + item.id">{{item.name}}</label>
       </li>
       <ul>
-        <label for="page-size">Page Size: </label>
+        <label for="page-size"> Page Size: </label>
         <input id="page-size" v-model="pageSize">
-        <label for="page-size">Page No: </label>
+        <label for="page-size"> Page No: </label>
         <input id="page-size" v-model="pageNo">
       </ul>
       <p> <input type="submit" value="Show Coupons"></p>
@@ -47,18 +47,18 @@
     <table>
       <tr>
         <th>
-          <b>Coupon No</b>
+          <b>Coupon Type</b>
         </th>
         <th>
-          <b>Coupon Type</b>
+          <b>Coupon No</b>
         </th>
       </tr>
       <tr v-for="coupon in couponList" v-bind:key="'coupon' + coupon.id">
         <th>
-          {{coupon.id}}
+          {{couponTypeHash[coupon.couponTypeId]}}
         </th>
         <th>
-          {{couponTypeHash[coupon.couponTypeId]}}
+          {{coupon.id}}
           </th>
       </tr>
     </table>
@@ -90,8 +90,8 @@ export default {
   methods: {
     onCouponListSubmit: function(e) {
       const uri = (this.selectedFilterId)?
-        `http://localhost:3000/coupons/${this.selectedFilterId}/list/${this.pageNo}`
-        : `http://localhost:3000/coupons/list/${this.pageNo}`
+        `http://localhost:3000/coupons/${this.selectedFilterId}/list/${this.pageNo}?pageSize=${this.pageSize}`
+        : `http://localhost:3000/coupons/list/${this.pageNo}?pageSize=${this.pageSize}`
       axios.get(uri).then((resp) => {
         console.log(resp)
         this.couponList = resp.data.payload

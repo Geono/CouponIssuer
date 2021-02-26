@@ -4,13 +4,13 @@ var couponService = require("../service/couponService");
 
 /* GET home page. */
 router.get("/list/:page", async function (req, res, next) {
+  console.log("req.query: ", req.query);
   const pageSize = !!req.query.pageSize ? req.query.pageSize : 10;
   const coupons = await couponService.getCoupons(
     null,
     req.params.page,
     pageSize
   );
-  console.log("coupons: ", coupons);
   return res.json({
     payload: coupons,
   });
@@ -23,14 +23,12 @@ router.get("/:id/list/:page", async function (req, res, next) {
     req.params.page,
     pageSize
   );
-  console.log("coupons: ", coupons);
   return res.json({
     payload: coupons,
   });
 });
 
 router.post("/", function (req, res, next) {
-  console.log("req.body", req.body);
   const { couponTypeId, issueCount } = req.body;
   if (issueCount > 100000) {
     res.status(400).send("Issue count is too high (<= 100000)");
@@ -48,7 +46,6 @@ router.post("/", function (req, res, next) {
 
 router.get("/names", async function (req, res, next) {
   const listNames = await couponService.listNames();
-  console.log("listNames: ", listNames);
   return res.json({
     payload: listNames,
   });
@@ -56,7 +53,6 @@ router.get("/names", async function (req, res, next) {
 
 router.post("/name", async function (req, res, next) {
   const name = req.body.name;
-  console.log("name: ", name);
   if (name) {
     await couponService.addName(name);
   } else {

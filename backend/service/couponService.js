@@ -10,7 +10,6 @@ function addName(name) {
   return db
     .query("INSERT INTO COUPON_TYPE(NAME) VALUES($1)", [name])
     .then((res) => {
-      console.log("res: ", res);
       return;
     });
 }
@@ -29,25 +28,19 @@ function getCoupons(id, page, pageSize) {
     ? `SELECT ID, COUPON_TYPE_ID FROM COUPON WHERE COUPON_TYPE_ID = ${id} LIMIT ${pageSize} OFFSET ${page}`
     : `SELECT ID, COUPON_TYPE_ID FROM COUPON LIMIT ${pageSize} OFFSET ${page}`;
   return db.queryAsync(query).then((queryResult) => {
-    console.log("queryResult.rows: ", queryResult.rows);
     const result = [];
     queryResult.rows.forEach((row) => {
-      console.log("row: ", row);
       result.push({
         couponTypeId: row.coupon_type_id,
         id: row.id,
       });
     });
-    console.log("result: ", result);
     return result;
   });
 }
 
 async function issueCoupon(couponTypeId, issueCount) {
-  console.log("couponTypeId: ", couponTypeId);
-  console.log("issueCount: ", issueCount);
   const query = `INSERT INTO coupon(coupon_type_id) VALUES(${couponTypeId})`;
-  console.log(query);
   for (let i = 0; i < issueCount; i++) {
     await db.queryAsync(query);
   }
